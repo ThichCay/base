@@ -28,7 +28,4 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
-    # Run a set of command
-    - name: Firebase Login
-      run: firebase login
       
