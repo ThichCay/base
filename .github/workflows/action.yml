@@ -29,4 +29,28 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm install firebase
-    - run: npm test
+    - run: firebase init hosting:github
+    
+
+  build_and_preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_THICHCAY_COM }}'
+          projectId: thichcay-com
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
+          
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_THICHCAY_COM }}'
+          channelId: live
+          projectId: thichcay-com
